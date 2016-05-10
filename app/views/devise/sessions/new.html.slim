@@ -1,0 +1,12 @@
+h2 Log in
+- if current_user && current_user.mondo.present?
+  p Connected Mondo
+- else
+  = link_to 'Log in with Mondo', user_mondo_omniauth_authorize_path
+  
+
+- if current_user && current_user.foursquare.present?
+  p Connected Foursquare
+- else
+  = link_to 'Log in with Foursquare', user_foursquare_omniauth_authorize_path
+  
