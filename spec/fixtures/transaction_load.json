@@ -1,0 +1,23 @@
+{
+  "id": "tx_0000983py03Wn23f3WklUH",
+  "created": "2016-05-10T13:55:43.8Z",
+  "description": "Top up",
+  "amount": 10000,
+  "currency": "GBP",
+  "merchant": null,
+  "notes": "",
+  "metadata": {},
+  "account_balance": 10031,
+  "attachments": [],
+  "category": "mondo",
+  "is_load": true,
+  "settled": "2016-05-10T13:55:43.8Z",
+  "local_amount": 10000,
+  "local_currency": "GBP",
+  "updated": "2016-05-10T13:55:44.425Z",
+  "account_id": "acc_000096SKfC7FOW9wvuGfhJ",
+  "counterparty": {},
+  "scheme": "gps_mastercard",
+  "dedupe_id": "518644020109421616",
+  "originator": false
+}

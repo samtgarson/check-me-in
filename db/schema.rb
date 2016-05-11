@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510162129) do
+ActiveRecord::Schema.define(version: 20160511084510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,29 @@ ActiveRecord::Schema.define(version: 20160510162129) do
   end
 
   add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers", using: :btree
+
+  create_table "merchants", force: :cascade do |t|
+    t.string   "address"
+    t.string   "name"
+    t.string   "emoji"
+    t.string   "foursquare_id"
+    t.string   "mondo_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "merchants", ["mondo_id"], name: "index_merchants_on_mondo_id", using: :btree
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "merchant_id"
+    t.string   "data"
+    t.string   "mondo_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "transactions", ["merchant_id"], name: "index_transactions_on_merchant_id", using: :btree
+  add_index "transactions", ["mondo_id"], name: "index_transactions_on_mondo_id", using: :btree
 
   create_table "user_authentications", force: :cascade do |t|
     t.integer  "user_id"
@@ -56,4 +79,5 @@ ActiveRecord::Schema.define(version: 20160510162129) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "transactions", "merchants"
 end

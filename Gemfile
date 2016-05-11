@@ -18,8 +18,6 @@ gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'virtus'
 
-gem 'rails_12factor', group: :production
-
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
@@ -32,10 +30,12 @@ group :development, :test do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.0'
-  gem 'simplecov'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
 end
 
+gem 'rails_12factor', group: :production
+
+gem 'simplecov', require: false, group: :test
