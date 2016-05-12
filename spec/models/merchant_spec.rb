@@ -23,7 +23,7 @@ RSpec.describe Merchant, type: :model do
       read_fixture 'spec/fixtures/transaction_no_foursquare.json'
       it_behaves_like 'a valid merchant'
 
-      it 'has fetches a foursquare id' do
+      it 'fetches a foursquare id' do
         expect(subject.foursquare_id?).to be_truthy
       end
     end

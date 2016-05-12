@@ -1,7 +1,8 @@
 class Transaction < ActiveRecord::Base
   belongs_to :merchant
+  belongs_to :user
   serialize :data
-  validates :data, :mondo_id, presence: true
+  validates :data, :mondo_id, :user, presence: true
   validates :merchant, presence: true, if: :valid_for_checkin?
 
   class << self
@@ -14,12 +15,17 @@ class Transaction < ActiveRecord::Base
     def transform_hash(data)
       { data: data.slice(*allowed_attributes) }.tap do |d|
         d[:mondo_id] = data[:id]
+        d[:account_id] = data[:account_id]
       end
     end
 
     def allowed_attributes
       %i(is_load is_online currency amount category)
     end
+  end
+
+  def account_id=(id)
+    self.user = User.find_by_mondo_id(id)
   end
 
   def find_merchant(data)

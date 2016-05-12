@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511084510) do
+ActiveRecord::Schema.define(version: 20160512155955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,10 +42,12 @@ ActiveRecord::Schema.define(version: 20160511084510) do
     t.string   "mondo_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   add_index "transactions", ["merchant_id"], name: "index_transactions_on_merchant_id", using: :btree
   add_index "transactions", ["mondo_id"], name: "index_transactions_on_mondo_id", using: :btree
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
   create_table "user_authentications", force: :cascade do |t|
     t.integer  "user_id"
@@ -80,4 +82,5 @@ ActiveRecord::Schema.define(version: 20160511084510) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "transactions", "merchants"
+  add_foreign_key "transactions", "users"
 end

@@ -1,11 +1,20 @@
 class User < ActiveRecord::Base
-  def self.create_from_omniauth(params)
-    attributes = {
-      email: params['info']['email'],
-      password: Devise.friendly_token
-    }
+  class << self
+    def create_from_omniauth(params)
+      attributes = {
+        email: params['info']['email'],
+        password: Devise.friendly_token
+      }
 
-    create(attributes)
+      create(attributes)
+    end
+
+    def find_by_mondo_id(id)
+      joins(authentications: :authentication_provider)
+        .find_by(
+          user_authentications: { uid: id },
+          authentication_providers: { name: 'mondo' })
+    end
   end
 
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy

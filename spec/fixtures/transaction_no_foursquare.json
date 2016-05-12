@@ -42,5 +42,20 @@
       "suggested_tags": "#food",
       "twitter_id": ""
     }
-  }
+  },
+  "notes": "",
+  "metadata": {},
+  "account_balance": 2746,
+  "attachments": [],
+  "category": "eating_out",
+  "is_load": false,
+  "settled": "2016-04-29T08:16:38.807Z",
+  "local_amount": -910,
+  "local_currency": "GBP",
+  "updated": "2016-04-29T10:25:30.741Z",
+  "account_id": "acc_000096SKfC7FOW9wvuGfhJ",
+  "counterparty": {},
+  "scheme": "gps_mastercard",
+  "dedupe_id": "518644020160428068682010495",
+  "originator": false
 }

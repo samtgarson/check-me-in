@@ -11,6 +11,9 @@ RSpec.describe Transaction, type: :model do
     before do
       allow(Merchant).to receive(:find_or_create_from_transaction)
         .and_return(FactoryGirl.create :merchant, :with_foursquare)
+
+      allow(User).to receive(:find_by_mondo_id)
+        .and_return(FactoryGirl.create :user)
     end
 
     subject { Transaction.create_from_api data }
