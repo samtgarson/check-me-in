@@ -2,7 +2,6 @@ class Merchant < ActiveRecord::Base
   has_many :transactions
   serialize :address
   after_create :fetch_foursquare_id, unless: :foursquare_id?
-
   validates :mondo_id, :address, :name, presence: true
 
   class << self
@@ -26,11 +25,22 @@ class Merchant < ActiveRecord::Base
     end
   end
 
-  def check_in!
-  end
-
   private
 
   def fetch_foursquare_id
+    foursquare_search[:venues].each do |venue|
+      update_attributes(foursquare_id: venue[:id]) and break if venue.dig(:location, :postalCode) == address[:postcode]
+    end
+  end
+
+  def foursquare_client
+    FoursquareClient.new
+  end
+
+  def foursquare_search
+    @foursquare_search ||= foursquare_client.search_venues(
+      ll: "#{address[:latitude]}, #{address[:longitude]}",
+      query: name
+    ).deep_symbolize_keys
   end
 end

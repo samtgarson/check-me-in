@@ -13,10 +13,12 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/poltergeist'
+require 'webmock/rspec'
 
 Capybara.javascript_driver = :poltergeist
+WebMock.disable_net_connect!(allow_localhost: true)
 
-# Dir[Rails.root.join('spec/support/shared/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/shared/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 

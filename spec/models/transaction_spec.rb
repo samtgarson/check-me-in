@@ -8,6 +8,11 @@ end
 
 RSpec.describe Transaction, type: :model do
   describe '.create_from_transaction' do
+    before do
+      allow(Merchant).to receive(:find_or_create_from_transaction)
+        .and_return(FactoryGirl.create :merchant, :with_foursquare)
+    end
+
     subject { Transaction.create_from_api data }
 
     context 'for a perfect transaction' do

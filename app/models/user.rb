@@ -27,6 +27,6 @@ class User < ActiveRecord::Base
   private
 
   def find_authentication(name)
-    authentications.joins(:authentication_provider).where(authentication_providers: { name: name })
+    authentications.joins(:authentication_provider).find_by(authentication_providers: { name: name })
   end
 end
