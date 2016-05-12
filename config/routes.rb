@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   get 'login', to: 'application#login'
   post 'mondo', to: 'application#mondo'
   root to: 'application#home'
-
 end

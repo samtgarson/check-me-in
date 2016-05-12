@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :transaction do
     merchant nil
-    data "MyString"
+    data 'MyString'
   end
 end
