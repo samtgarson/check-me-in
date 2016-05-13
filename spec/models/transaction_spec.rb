@@ -24,6 +24,7 @@ RSpec.describe Transaction, type: :model do
 
       it 'has a merchant' do
         expect(subject.merchant).to be_a Merchant
+        expect(subject.state_name).to eq :ready
       end
     end
 

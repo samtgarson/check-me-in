@@ -1,10 +1,4 @@
 class Transaction < ActiveRecord::Base
-  belongs_to :merchant
-  belongs_to :user
-  serialize :data
-  validates :data, :mondo_id, :user, presence: true
-  validates :merchant, presence: true, if: :valid_for_checkin?
-
   class << self
     def create_from_api(data)
       create(transform_hash(data)).find_merchant(data[:merchant])
@@ -20,7 +14,38 @@ class Transaction < ActiveRecord::Base
     end
 
     def allowed_attributes
-      %i(is_load is_online currency amount category)
+      %i(is_load is_online currency amount)
+    end
+  end
+
+  belongs_to :merchant
+  belongs_to :user
+  serialize :data
+  validates :data, :mondo_id, :user, presence: true
+
+  state_machine initial: :created do
+    event :get_ready do
+      transition created: :ready, if: 'merchant.present?'
+    end
+
+    event :checkin do
+      transition ready: :processing, if: :good_to_go?
+    end
+
+    event :succeed_checkin do
+      transition processing: :checked_in
+    end
+
+    event :fail_checkin do
+      transition processing: :failed
+    end
+
+    state :ready do
+      validates :merchant, presence: true
+    end
+
+    after_transition ready: :processing do |transaction, _transition|
+      FoursquareClient.new(transaction.user).checkin!(transaction)
     end
   end
 
@@ -29,15 +54,24 @@ class Transaction < ActiveRecord::Base
   end
 
   def find_merchant(data)
-    update_attributes(merchant: Merchant.find_or_create_from_transaction(data)) if valid_for_checkin? && data.any?
+    return self unless valid_for_checkin? && data.any?
+    update_attributes(
+      merchant: Merchant.find_or_create_from_transaction(data),
+      state_event: 'get_ready')
     self
   end
+
+  def good_to_go?
+    valid? && valid_for_checkin? && user_allows? && merchant.foursquare_id?
+  end
+
+  private
 
   def valid_for_checkin?
     !data[:is_load] && !data[:is_online]
   end
 
   def user_allows?
-    user.allow_checkins && user.send(merchant.category)
+    user.allows_checkins && user.send(merchant.category)
   end
 end

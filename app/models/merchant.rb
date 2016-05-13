@@ -9,7 +9,7 @@ class Merchant < ActiveRecord::Base
   class << self
     def find_or_create_from_transaction(data)
       find_or_create_by(mondo_id: data[:id]) do |m|
-        m.attributes = transform_hash data
+        m.attributes = transform_hash(data).deep_symbolize_keys
       end
     end
 

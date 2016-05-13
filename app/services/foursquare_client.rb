@@ -9,6 +9,15 @@ class FoursquareClient
     @client = Foursquare2::Client.new(client_options.merge api_version: API_VERSION)
   end
 
+  def checkin!(transaction)
+    client.add_checkin(
+      venueId: transaction.merchant.foursquare_id,
+      shout: transaction.merchant.emoji)
+    transaction.succeed_checkin
+  rescue Foursquare2::APIError
+    transaction.fail_checkin
+  end
+
   private
 
   def client_options

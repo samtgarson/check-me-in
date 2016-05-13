@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   has_many :authentication_providers, through: :authentications, as: :providers
+  has_many :transactions
   devise :omniauthable, :database_authenticatable, :registerable, :trackable, :validatable, omniauth_providers: [:mondo, :foursquare]
   store :categories, accessors: Merchant::CATEGORIES
 
