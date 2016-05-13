@@ -2,7 +2,9 @@ class Merchant < ActiveRecord::Base
   has_many :transactions
   serialize :address
   after_create :fetch_foursquare_id, unless: :foursquare_id?
-  validates :mondo_id, :address, :name, presence: true
+  validates :mondo_id, :address, :name, :category, presence: true
+
+  CATEGORIES = %i(transport groceries eating_out cash bills entertainment shopping holidays general expenses).freeze
 
   class << self
     def find_or_create_from_transaction(data)

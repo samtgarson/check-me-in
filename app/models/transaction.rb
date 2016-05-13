@@ -36,4 +36,8 @@ class Transaction < ActiveRecord::Base
   def valid_for_checkin?
     !data[:is_load] && !data[:is_online]
   end
+
+  def user_allows?
+    user.allow_checkins && user.send(merchant.category)
+  end
 end

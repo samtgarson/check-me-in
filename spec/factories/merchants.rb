@@ -3,6 +3,7 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
     name { Faker::Commerce.name }
     mondo_id { Faker::Number.number(10) }
+    category { Merchant::CATEGORIES.sample }
 
     trait :with_foursquare do
       foursquare_id { Faker::Number.number(10) }

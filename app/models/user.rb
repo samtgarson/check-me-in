@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   has_many :authentication_providers, through: :authentications, as: :providers
   devise :omniauthable, :database_authenticatable, :registerable, :trackable, :validatable, omniauth_providers: [:mondo, :foursquare]
+  store :categories, accessors: Merchant::CATEGORIES
+
+  after_create :setup_categories
 
   def mondo
     find_authentication 'mondo'
@@ -34,6 +37,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def setup_categories
+    Merchant::CATEGORIES.each { |cat| update_attribute cat, true }
+  end
 
   def find_authentication(name)
     authentications.joins(:authentication_provider).find_by(authentication_providers: { name: name })
