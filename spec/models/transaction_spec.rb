@@ -19,7 +19,7 @@ RSpec.describe Transaction, type: :model do
     subject { Transaction.create_from_api data }
 
     context 'for a perfect transaction' do
-      read_fixture 'spec/fixtures/transaction_perfect.json'
+      read_fixture 'spec/fixtures/transaction_bibimbap.json'
       it_behaves_like 'a valid transaction'
 
       it 'has a merchant' do

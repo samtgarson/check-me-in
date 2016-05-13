@@ -11,7 +11,7 @@ RSpec.describe Merchant, type: :model do
     subject { Merchant.find_or_create_from_transaction data[:merchant] }
 
     context 'for a perfect transaction' do
-      read_fixture 'spec/fixtures/transaction_perfect.json'
+      read_fixture 'spec/fixtures/transaction_bibimbap.json'
       it_behaves_like 'a valid merchant'
 
       it 'has a foursquare id' do
@@ -20,7 +20,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     context 'for a transaction with no foursquare id' do
-      read_fixture 'spec/fixtures/transaction_no_foursquare.json'
+      read_fixture 'spec/fixtures/transaction_yoobi.json'
       it_behaves_like 'a valid merchant'
 
       it 'fetches a foursquare id' do
