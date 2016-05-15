@@ -1,12 +1,14 @@
-h2 Log in
-- if current_user && current_user.mondo.present?
-  p Connected Mondo
-- else
-  = link_to 'Log in with Mondo', user_mondo_omniauth_authorize_path
-  
+.hero
+  h2 Check in to Foursquare when you use your Mondo card.
+  p Check Me In is currently in free beta. Connect your accounts below to get started.
+  - if current_user && current_user.mondo.present?
+    p.button.secondary.done Connected Mondo
+  - else
+    = link_to 'Log in with Mondo', user_mondo_omniauth_authorize_path, class: 'button'
+    
 
-- if current_user && current_user.foursquare.present?
-  p Connected Foursquare
-- else
-  = link_to 'Log in with Foursquare', user_foursquare_omniauth_authorize_path
-  
+  - if current_user && current_user.foursquare.present?
+    p.button.secondary.done Connected Foursquare
+  - else
+    = link_to 'Log in with Foursquare', user_foursquare_omniauth_authorize_path, class: 'button'
+    

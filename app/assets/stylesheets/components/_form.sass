@@ -1,0 +1,27 @@
+.button
+  +alt-font
+  padding: 12px 20px
+  background-color: $primary
+  color: white
+  border-radius: 100px
+  width: 300px
+  display: block
+  margin: 20px auto
+  position: relative
+
+  &.secondary
+    color: $primary
+    background-color: transparent
+
+  &.done::before
+    content: ""
+    width: 7px
+    height: 14px
+    border: 2px solid transparent
+    border-bottom-color: $primary
+    border-right-color: $primary
+    display: inline-block
+    transform: rotate(37deg)
+    margin-bottom: -2px
+    margin-right: 6px
+

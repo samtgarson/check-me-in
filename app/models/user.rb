@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     mondo.present? && foursquare.present?
   end
 
+  def recent_transactions(n = 5)
+    transactions.order(:created_at).limit(n)
+  end
+
   private
 
   def setup_categories

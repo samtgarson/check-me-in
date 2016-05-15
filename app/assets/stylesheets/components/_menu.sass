@@ -1,0 +1,54 @@
+#menu
+  background-color: $primary
+  z-index: 2
+  color: white
+  position: absolute
+  left: -300px
+  top: 0
+  height: 100%
+  width: 300px
+  padding: 50px
+
+  transition: .2s all ease
+
+  .menu-open &
+    left: 0
+
+  p, a, h1, h2, h3
+    color: white
+
+.menu__items
+  margin: 0
+  padding: 0
+
+.menu__item
+  list-style-type: none
+  margin-bottom: 20px
+  +alt-font
+
+.menu__credit
+  position: absolute
+  bottom: 50px
+  left: 50px
+  opacity: .5
+  margin-bottom: 0
+
+$hamburger-types          : (vortex elastic)
+$hamburger-padding-x      : 0px
+$hamburger-padding-y      : 0px
+$hamburger-layer-width    : 18px
+$hamburger-layer-height   : 3px
+$hamburger-layer-spacing  : 2px
+$hamburger-layer-color    : $primary
+$hamburger-hover-transition-duration: 1.2s
+$hamburger-hover-transition-timing-function: ease 
+
+@import 'hamburgers'
+
+.hamburger
+  margin-right: 16px
+  vertical-align: super
+  outline: none
+
+  .hamburger-inner
+    transition-duration: $hamburger-hover-transition-duration !important

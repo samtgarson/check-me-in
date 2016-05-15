@@ -1,0 +1,49 @@
+body
+  display: flex
+  margin: 0
+  padding: 0
+  flex-direction: column
+  justify-content: center
+  min-height: 100vh
+
+.wrapper
+  +outer-container
+  +pad(50px)
+  max-height: 95vh
+  height: 500px
+  width: 95%
+  box-shadow: 0px 20px 100px rgba(black, 0.2)
+  border-radius: 16px
+  position: relative
+  overflow: hidden
+
+.main
+  height: 100%
+  position: relative
+  transition: .2s all ease
+
+  &::after
+    content: ''
+    position: absolute
+    width: 100%
+    left: 0
+    top: 0
+    bottom: 0
+    +linear-gradient(to right, rgba(white, 0), rgba(white, 0.6) 50%)
+    pointer-events: none
+    opacity: 0
+    transition: .2s all ease
+
+  .menu-open &
+    transform: translateX(300px)
+
+    &::after
+      opacity: 1
+
+.hero
+  position: absolute
+  top: 50%
+  left: 0
+  width: 100%
+  transform: translateY(-50%)
+  text-align: center

@@ -1,1 +1,9 @@
-h1 Hello!
+- if current_user.transactions.any?
+  table
+    - current_user.recent_transactions.each do |t|
+      tr
+        td = t.merchant.name
+- else
+  .hero
+    h2 Check Me In is all set!
+    h3 Your next Mondo transaction will appear here. 💸

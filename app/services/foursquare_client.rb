@@ -14,8 +14,9 @@ class FoursquareClient
       venueId: transaction.merchant.foursquare_id,
       shout: transaction.merchant.emoji)
     transaction.succeed_checkin
-  rescue Foursquare2::APIError
+  rescue Foursquare2::APIError => e
     transaction.fail_checkin
+    raise e
   end
 
   private
