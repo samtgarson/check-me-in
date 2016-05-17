@@ -23,6 +23,8 @@ class Transaction < ActiveRecord::Base
   serialize :data
   validates :data, :mondo_id, :user, presence: true
 
+  scope :complete, -> { with_state(:ready, :failed, :checked_in) }
+
   state_machine initial: :created do
     event :get_ready do
       transition created: :ready, if: 'merchant.present?'

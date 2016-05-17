@@ -1,0 +1,54 @@
+$categories: general expenses cash holidays entertainment eating-out bills shopping transport groceries
+
+.settings-checkboxes
+  text-align: left
+  margin: 30px 0
+
+  .input.boolean
+    display: inline-block
+    padding: 5px
+    width: 160px
+
+    input
+      display: none
+
+    label
+      display: block
+      position: relative
+
+      &::before
+        content: ''
+        display: inline-block
+        width: 40px
+        height: 20px
+        border-radius: 80px
+        border: 2px solid black
+        margin: 10px
+        vertical-align: middle
+        transition: .2s all ease
+
+      &::after
+        content: ''
+        position: absolute
+        width: 40px
+        height: 20px
+        background: image-url('tick.png')
+        top: 10px
+        left: 10px
+        z-index: 100
+        background-size: 0
+        background-repeat: no-repeat
+        background-position: center
+        transition: 0.4s background ease
+
+    input:checked + label
+      &::before
+        border-width: 10px
+
+      &::after
+        background-size: 12px
+
+    @each $category, $colour in $mondo
+      &.#{$category}
+        label::before
+          border-color: $colour

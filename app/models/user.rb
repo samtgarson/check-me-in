@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   private
 
   def setup_categories
-    Merchant::CATEGORIES.each { |cat| update_attribute cat, true }
+    Merchant::CATEGORIES.each { |cat| update_attribute cat, 1 }
   end
 
   def find_authentication(name)

@@ -1,0 +1,6 @@
+tr data-id=transaction.id
+  td.date = time_ago_in_words transaction.created_at
+  td = link_to transaction.merchant.name, "http://foursquare.com/v/#{transaction.merchant.foursquare_id}"
+  td = Money.new(transaction.data[:amount], transaction.data[:currency]).format
+  td.status
+    span class=transaction.state

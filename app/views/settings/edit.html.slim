@@ -1,0 +1,7 @@
+= simple_form_for current_user, url: settings_path, html: { class: 'hero' } do |f|
+  p Choose which categories should automatically check you in.
+  .settings-checkboxes
+    - current_user.categories.each do |cat, val|
+      = f.input cat, as: :boolean,  boolean_style: :inline, input_options: { value: val }, wrapper_html: { class: cat.humanize.parameterize }
+
+  = f.button :submit, 'Save', class: 'button done'

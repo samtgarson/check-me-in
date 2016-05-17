@@ -1,0 +1,29 @@
+table
+  width: 100%
+  table-layout: fixed
+
+  td
+    padding: 10px 0
+    text-align: left
+
+  td.date
+    +alt-font
+    opacity: .5
+    width: 150px
+
+  td.status
+    width: 50px
+
+    &:not(:last-child)
+      border-bottom: 1px solid rgba(black, .1)
+
+    span
+      vertical-align: middle
+      display: block
+      width: 20px
+      height: 20px
+      background-color: rgba(black, .2)
+      border-radius: 100px
+
+      &.checked_in
+        background: image-url('tick.png') center/50% no-repeat #4CAF50
