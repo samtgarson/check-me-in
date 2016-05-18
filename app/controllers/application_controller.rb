@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_for_both
-    redirect_to login_path unless current_user.fully_registered?
+    redirect_to login_path unless current_user.registered?
   end
 end

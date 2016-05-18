@@ -23,7 +23,7 @@ class Merchant < ActiveRecord::Base
     end
 
     def allowed_attributes
-      attribute_names.map(&:to_sym)
+      attribute_names.map(&:to_sym) - [:id]
     end
   end
 
