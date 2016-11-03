@@ -1,6 +1,11 @@
 # CheckMeIn
 > Check yourself into Swarm automagically when you use your Mondo card
 
+[Check out the app here](https://check-me-in.herokuapp.com/)
+
+![Ready](http://i.imgur.com/5Wj414g.png)
+![Adjust your settings](http://i.imgur.com/dHmybOM.png)
+
 CheckMeIn is a basic RoR app which connects your Foursquare and Mondo accounts to check you into Swarm whenever you make a payment with your Mondo card.
 
 ## Contribute
